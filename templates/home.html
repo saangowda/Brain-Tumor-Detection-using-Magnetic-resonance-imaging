@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Brain Tumor Detection</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet" />
+</head>
+<body class="bg-white text-gray-800">
+
+  <!-- ✅ NAVBAR -->
+  <header class="flex items-center justify-between px-6 py-4 shadow-md">
+    <a href="/" class="flex items-center space-x-2 text-2xl font-bold text-black">
+      <img src="{{ url_for('static', filename='assets/brain-icon.svg') }}" alt="Logo" class="w-6 h-6">
+      <span>Brain-tumor-detection</span>
+    </a>
+
+    <nav class="hidden lg:flex gap-10 text-lg">
+      <a href="/" class="text-indigo-600 font-semibold">Home</a>
+      <a href="/model" class="text-gray-700 hover:text-indigo-500">Model</a>
+      <a href="#specs" class="text-gray-700 hover:text-indigo-500">Specs</a>
+      <a href="#about" class="text-gray-700 hover:text-indigo-500">About</a>
+      {% if session['user'] %}
+      <a href="{{ url_for('logout') }}" class="text-red-500 font-semibold hover:underline">Logout</a>
+      {% endif %}
+    </nav>
+
+    <a href="#contact" class="hidden lg:inline-block bg-gray-200 px-6 py-2 rounded-lg text-gray-600 font-semibold hover:bg-gray-300">Contact</a>
+  </header>
+
+  <!-- ✅ HERO SECTION WITH GIF -->
+  <section class="text-center py-12 max-w-screen-xl mx-auto px-4">
+    <div class="flex flex-col-reverse md:flex-row items-center justify-between gap-8">
+      <!-- Text -->
+      <div class="md:w-1/2 text-left">
+        <h1 class="text-4xl font-bold mb-4">Brain Tumor Detection</h1>
+        <p class="text-lg text-gray-600 mb-6">
+          Pioneering the future of brain wellness. Upload an MRI and detect tumors in seconds using deep learning.
+        </p>
+        <a href="/model" class="bg-indigo-500 text-white px-6 py-2 rounded hover:bg-indigo-600 mr-4">Try Model</a>
+        <a href="#specs" class="bg-gray-300 text-gray-800 px-6 py-2 rounded hover:bg-gray-400">Check Specs</a>
+      </div>
+
+      <!-- GIF -->
+      <div class="md:w-1/2 flex justify-center">
+        <img src="{{ url_for('static', filename='assets/brain_animation.gif') }}" alt="Brain GIF" class="rounded-lg shadow-lg w-full max-w-sm">
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ MODEL STATS -->
+  <section id="specs" class="bg-gray-100 py-12">
+    <div class="max-w-screen-xl mx-auto px-4">
+      <h2 class="text-3xl font-semibold text-center mb-8">Model Performance</h2>
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div>
+          <div class="text-indigo-500 text-3xl font-bold">10</div>
+          <div class="text-gray-700">Epochs</div>
+        </div>
+        <div>
+          <div class="text-indigo-500 text-3xl font-bold">96%</div>
+          <div class="text-gray-700">Accuracy</div>
+        </div>
+        <div>
+          <div class="text-indigo-500 text-3xl font-bold">High</div>
+          <div class="text-gray-700">Precision</div>
+        </div>
+        <div>
+          <a href="https://www.kaggle.com/datasets/ahmedhamada0/brain-tumor-detection" target="_blank" class="text-indigo-500 text-2xl font-bold">Br35H</a>
+          <div class="text-gray-700">Dataset</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ HOW IT WORKS -->
+  <section class="py-16 bg-white">
+    <div class="max-w-screen-xl mx-auto px-4 text-center">
+      <h2 class="text-3xl font-bold mb-8">How It Works</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-gray-100 p-6 rounded-lg shadow">
+          <h3 class="text-xl font-semibold mb-2">1. Upload MRI</h3>
+          <p class="text-gray-600">Choose a PNG, JPG, or JPEG image of your brain scan.</p>
+        </div>
+        <div class="bg-gray-100 p-6 rounded-lg shadow">
+          <h3 class="text-xl font-semibold mb-2">2. Prediction</h3>
+          <p class="text-gray-600">Model processes the scan and detects tumor presence.</p>
+        </div>
+        <div class="bg-gray-100 p-6 rounded-lg shadow">
+          <h3 class="text-xl font-semibold mb-2">3. Result & Summary</h3>
+          <p class="text-gray-600">Get clear result.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ ABOUT DEVELOPER -->
+  <section id="about" class="py-12 bg-gray-50">
+    <div class="max-w-screen-xl mx-auto px-4 md:flex md:items-center">
+      <div class="md:w-1/2 mb-8 md:mb-0">
+        <img src="{{ url_for('static', filename='assets/mec_brain.webp') }}" alt="Mechanical Brain" class="rounded shadow-lg">
+      </div>
+      <div class="md:w-1/2 md:pl-12">
+        <h2 class="text-2xl font-bold mb-4">About This Project</h2>
+        <p class="mb-4">
+          I'm <strong>Sahana K R</strong>, an MCA Student passionate about AI & ML. This system uses deep learning to detect brain tumors in MRI scans, aiming to assist early diagnosis.
+        </p>
+        <p class="text-gray-600">Technologies used: TensorFlow, Keras, OpenCV, Flask, SQLite, TailwindCSS</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ✅ CONTACT -->
+  <section id="contact" class="bg-white py-12 text-center">
+    <h2 class="text-2xl font-bold mb-4">Contact</h2>
+    <p class="text-gray-600">For suggestions, reach out at <strong>sanugowda87@gmail.com</strong></p>
+  </section>
+
+</body>
+</html>

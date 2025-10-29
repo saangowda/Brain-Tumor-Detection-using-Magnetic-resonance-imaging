@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title> Model Playground</title>
+  <meta name="description" content="Test capabilities of our Brain Tumor Detection Model">
+  <meta name="keywords" content="Brain Tumor Detection, AI, ML, MRI, Medical">
+  <meta name="author" content="NeuralInsight">
+
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://www.joerezendes.com/projects/Woah.css/woah.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+</head>
+<body class="bg-gray-100">
+
+  <!-- NAVBAR -->
+  {% include "nav.html" %}
+
+  <section class="bg-white py-10">
+    <div class="max-w-2xl mx-auto px-4 text-center">
+      <h1 class="text-4xl font-bold mb-6">Brain Tumor Detection</h1>
+
+      <!-- Upload Form -->
+      <form id="upload-file" method="post" enctype="multipart/form-data" action="/model">
+        <label for="imageUpload" class="block mb-4 text-lg font-medium text-gray-700">
+          Upload MRI Scan (PNG/JPG/JPEG)
+        </label>
+
+        <input type="file" name="file" id="imageUpload"
+               accept=".png, .jpg, .jpeg"
+               class="mb-6 block w-full text-sm text-gray-700 border border-gray-300 rounded-lg cursor-pointer bg-gray-50"/>
+
+        <button type="submit"
+                class="bg-indigo-500 hover:bg-indigo-600 text-white px-6 py-2 rounded-lg text-lg transition">
+          Predict
+        </button>
+      </form>
+
+      <!-- Display Result -->
+      {% if result %}
+      <div class="mt-10 bg-white rounded-lg shadow p-6">
+        <h2 class="text-2xl font-bold text-indigo-600 mb-4">Prediction: {{ result }}</h2>
+        
+        {% if result == "no_tumor" %}
+          <p class="text-gray-700 text-lg">
+            No tumor detected in the scan. If symptoms persist, consult a neurologist for further evaluation.
+          </p>
+        {% elif result == "glioma_tumor" %}
+          <p class="text-gray-700 text-lg">
+            Detected <strong>Glioma Tumor</strong> — a type of tumor that occurs in the brain and spinal cord. 
+            Please seek immediate medical attention for diagnosis and grading.
+          </p>
+        {% elif result == "meningioma_tumor" %}
+          <p class="text-gray-700 text-lg">
+            Detected <strong>Meningioma Tumor</strong> — usually noncancerous but can press on brain or spinal cord. 
+            Consult a neurosurgeon for treatment options.
+          </p>
+        {% elif result == "pituitary_tumor" %}
+          <p class="text-gray-700 text-lg">
+            Detected <strong>Pituitary Tumor</strong> — affects hormone production. 
+            Endocrinology consultation is recommended.
+          </p>
+        {% else %}
+          <p class="text-gray-700 text-lg">
+            Tumor detected. Further classification details not available.
+          </p>
+        {% endif %}
+      </div>
+      {% endif %}
+
+      <!-- View History Button -->
+      {% if session['user'] %}
+      <div class="mt-8">
+        <a href="{{ url_for('history') }}"
+           class="inline-block mt-4 bg-gray-200 text-gray-800 hover:bg-gray-300 px-6 py-2 rounded-lg font-semibold">
+          View My History
+        </a>
+      </div>
+      {% endif %}
+    </div>
+  </section>
+
+  <!-- Image Examples -->
+  <section class="max-w-screen-2xl mx-auto px-4 py-12">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h2 class="text-3xl font-bold mb-4">Use Correct MRI Images</h2>
+        <p class="text-gray-600 mb-6">
+          Our model relies on proper MRI scans for accurate results. Avoid blurry or unrelated images.
+        </p>
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+        <img src="{{ url_for('static', filename='assets/negative_tumor.jpg') }}"
+             alt="No Tumor" class="rounded-lg shadow"/>
+        <img src="{{ url_for('static', filename='assets/positive_tumor.jpg') }}"
+             alt="With Tumor" class="rounded-lg shadow"/>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  {% include "footer.html" %}
+
+</body>
+</html>

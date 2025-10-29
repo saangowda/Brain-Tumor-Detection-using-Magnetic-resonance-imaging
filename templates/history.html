@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction History</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.16/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 text-gray-900">
+    <div class="max-w-4xl mx-auto p-6 mt-10 bg-white rounded shadow">
+        <h1 class="text-3xl font-bold mb-6 text-center">🧠 Prediction History</h1>
+
+        {% if history %}
+        <table class="min-w-full border">
+            <thead class="bg-gray-200">
+                <tr>
+                    <th class="py-2 px-4 border">Image</th>
+                    <th class="py-2 px-4 border">Result</th>
+                    <th class="py-2 px-4 border">Timestamp</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in history %}
+                <tr class="hover:bg-gray-50">
+                    <td class="py-2 px-4 border">
+                        <img src="{{ url_for('static', filename='uploads/' ~ row[0]) }}" width="100" class="rounded shadow">
+                    </td>
+                    <td class="py-2 px-4 border">{{ row[1] }}</td>
+                    <td class="py-2 px-4 border">{{ row[2] }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% else %}
+        <p class="text-center text-gray-600">No prediction history found.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
