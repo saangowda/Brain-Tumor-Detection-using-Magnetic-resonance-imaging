@@ -41,22 +41,26 @@ Model Steps:
    git clone https://github.com/sahana-kr/Brain-Tumor-Detection.git
 2. Navigate to the project folder:
 
-cd Brain-Tumor-Detection
+    cd Brain-Tumor-Detection
 
 
 3. Install dependencies:
 
-pip install -r requirements.txt
+    pip install -r requirements.txt
 
 
 4. Run the Flask app:
 
-python app.py
+     python app.py
 
 
 5. Open your browser and go to:
 
-http://127.0.0.1:5000/
+     http://127.0.0.1:5000/
+
+⚠️ Note:
+The trained model file (braintumormodel_Multiclass.h5) and the dataset folders are not uploaded due to large file size limitations on GitHub.
+To retrain the model, you can run train.py using your own dataset (MRI brain images).
 
 📊 Results
 
