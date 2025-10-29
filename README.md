@@ -39,22 +39,22 @@ Model Steps:
 1. Clone this repository:
    ```bash
    git clone https://github.com/sahana-kr/Brain-Tumor-Detection.git
-Navigate to the project folder:
+2. Navigate to the project folder:
 
 cd Brain-Tumor-Detection
 
 
-Install dependencies:
+3. Install dependencies:
 
 pip install -r requirements.txt
 
 
-Run the Flask app:
+4. Run the Flask app:
 
 python app.py
 
 
-Open your browser and go to:
+5. Open your browser and go to:
 
 http://127.0.0.1:5000/
 
